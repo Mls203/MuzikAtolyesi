@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FinalProje.Models.garantiBilgisi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.garantiSüresi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Muzik.aletAdi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.garantiSüresi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Muzik.aletAdi)
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.garantiId }) |
+            @Html.ActionLink("Detay", "Details", new { id=item.garantiId }) |
+            @Html.ActionLink("Sil", "Delete", new { id=item.garantiId })
+        </td>
+    </tr>
+}
+
+</table>

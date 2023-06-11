@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd0766aabba14619a33d790c3d4b53bf" Name="Diagram1">
+        <EntityTypeShape EntityType="MuzikAtolyesiModel.alet_kategori" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuzikAtolyesiModel.alet_marka" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuzikAtolyesiModel.garantiBilgisi" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuzikAtolyesiModel.Muzik" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuzikAtolyesiModel.StokTakip" Width="1.5" PointX="6.875" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuzikAtolyesiModel.UserProfile" Width="1.5" PointX="7.125" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="MuzikAtolyesiModel.FK_Muzik_alet_kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="MuzikAtolyesiModel.FK_alet_marka_alet_marka" ManuallyRouted="false" />
+        <AssociationConnector Association="MuzikAtolyesiModel.FK_Muzik_alet_marka" ManuallyRouted="false" />
+        <AssociationConnector Association="MuzikAtolyesiModel.FK_garantiBilgisi_Muzik" ManuallyRouted="false" />
+        <AssociationConnector Association="MuzikAtolyesiModel.FK_Muzik_garantiBilgisi" ManuallyRouted="false" />
+        <AssociationConnector Association="MuzikAtolyesiModel.FK_Muzik_Muzik2" ManuallyRouted="false" />
+        <AssociationConnector Association="MuzikAtolyesiModel.FK_Muzik_Muzik3" ManuallyRouted="false" />
+        <AssociationConnector Association="MuzikAtolyesiModel.FK_StokTakip_Muzik" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MuzikAtolyesiModel.Uyeler" Width="1.5" PointX="0.75" PointY="5.875" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

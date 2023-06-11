@@ -1,0 +1,40 @@
+﻿@model FinalProje.Models.garantiBilgisi
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>garantiBilgisi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.garantiSüresi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.garantiSüresi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Muzik.aletAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Muzik.aletAdi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Sil" class="btn btn-default" /> |
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</div>
+    }
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<FinalProje.Models.Muzik>
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Yeni Kayıt", "Create", new { Id = ViewBag.Id })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.aletAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.satışAdetSayisi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.aletFiyati)
+        </th>
+     
+        <th>
+            @Html.DisplayNameFor(model => model.alet_kategori.kategoriAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.alet_marka1.markaAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.garantiBilgisi1.garantiSüresi)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.aletAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.satışAdetSayisi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aletFiyati)
+        </td>
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.alet_kategori.kategoriAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.alet_marka1.markaAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.garantiBilgisi1.garantiSüresi)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.aletId }) |
+            @Html.ActionLink("Detay", "Details", new { id=item.aletId }) |
+            @Html.ActionLink("Sil", "Delete", new { id=item.aletId })
+        </td>
+    </tr>
+}
+
+</table>

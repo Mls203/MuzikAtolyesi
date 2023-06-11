@@ -1,0 +1,84 @@
+﻿@model FinalProje.Models.Muzik
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    #b1 {
+        margin-top: 5px;
+    }
+</style>
+
+<div id="b1">
+    <h2>Detay</h2>
+</div>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.aletAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aletAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.satışAdetSayisi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.satışAdetSayisi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aletFiyati)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aletFiyati)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stokId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stokId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alet_kategori.kategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alet_kategori.kategoriAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alet_marka1.markaAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alet_marka1.markaAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.garantiBilgisi1.garantiSüresi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.garantiBilgisi1.garantiSüresi)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.aletId }) |
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</p>

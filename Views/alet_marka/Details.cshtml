@@ -1,0 +1,34 @@
+﻿@model FinalProje.Models.alet_marka
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>alet_marka</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.markaAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.markaAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Muzik.aletAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Muzik.aletAdi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.markaId }) |
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</p>

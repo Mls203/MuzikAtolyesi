@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MuzikAtolyesiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alet_kategori">
+          <Key>
+            <PropertyRef Name="kategoriId" />
+          </Key>
+          <Property Name="kategoriId" Type="int" Nullable="false" />
+          <Property Name="kategoriAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="alet_marka">
+          <Key>
+            <PropertyRef Name="markaId" />
+          </Key>
+          <Property Name="markaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aletId" Type="int" />
+          <Property Name="markaAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="garantiBilgisi">
+          <Key>
+            <PropertyRef Name="garantiId" />
+          </Key>
+          <Property Name="garantiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aletId" Type="int" />
+          <Property Name="garantiSüresi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Muzik">
+          <Key>
+            <PropertyRef Name="aletId" />
+          </Key>
+          <Property Name="aletId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriId" Type="int" />
+          <Property Name="aletAdi" Type="varchar" MaxLength="50" />
+          <Property Name="satışAdetSayisi" Type="int" />
+          <Property Name="aletFiyati" Type="money" />
+          <Property Name="garantiId" Type="int" />
+          <Property Name="stokId" Type="int" />
+          <Property Name="markaId" Type="int" />
+        </EntityType>
+        <EntityType Name="StokTakip">
+          <Key>
+            <PropertyRef Name="stokId" />
+          </Key>
+          <Property Name="stokId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stokAdeti" Type="int" />
+          <Property Name="aletId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Uyeler">
+          <Key>
+            <PropertyRef Name="UyeId" />
+          </Key>
+          <Property Name="UyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="UyeSoyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="UyeTc" Type="nvarchar" MaxLength="50" />
+          <Property Name="UyeTel" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UyeAdres" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_alet_marka_alet_marka">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="0..1" />
+          <End Role="alet_marka" Type="Self.alet_marka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="alet_marka">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_garantiBilgisi_Muzik">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="0..1" />
+          <End Role="garantiBilgisi" Type="Self.garantiBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="garantiBilgisi">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_alet_kategori">
+          <End Role="alet_kategori" Type="Self.alet_kategori" Multiplicity="0..1" />
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alet_kategori">
+              <PropertyRef Name="kategoriId" />
+            </Principal>
+            <Dependent Role="Muzik">
+              <PropertyRef Name="kategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_alet_marka">
+          <End Role="alet_marka" Type="Self.alet_marka" Multiplicity="0..1" />
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alet_marka">
+              <PropertyRef Name="markaId" />
+            </Principal>
+            <Dependent Role="Muzik">
+              <PropertyRef Name="markaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_garantiBilgisi">
+          <End Role="garantiBilgisi" Type="Self.garantiBilgisi" Multiplicity="0..1" />
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="garantiBilgisi">
+              <PropertyRef Name="garantiId" />
+            </Principal>
+            <Dependent Role="Muzik">
+              <PropertyRef Name="garantiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_Muzik2">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="1" />
+          <End Role="Muzik1" Type="Self.Muzik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="Muzik1">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_Muzik3">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="1" />
+          <End Role="Muzik1" Type="Self.Muzik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="Muzik1">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StokTakip_Muzik">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="0..1" />
+          <End Role="StokTakip" Type="Self.StokTakip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="StokTakip">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MuzikAtolyesiModelStoreContainer">
+          <EntitySet Name="alet_kategori" EntityType="Self.alet_kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="alet_marka" EntityType="Self.alet_marka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="garantiBilgisi" EntityType="Self.garantiBilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Muzik" EntityType="Self.Muzik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StokTakip" EntityType="Self.StokTakip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uyeler" EntityType="Self.Uyeler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_alet_marka_alet_marka" Association="Self.FK_alet_marka_alet_marka">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="alet_marka" EntitySet="alet_marka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_garantiBilgisi_Muzik" Association="Self.FK_garantiBilgisi_Muzik">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="garantiBilgisi" EntitySet="garantiBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_alet_kategori" Association="Self.FK_Muzik_alet_kategori">
+            <End Role="alet_kategori" EntitySet="alet_kategori" />
+            <End Role="Muzik" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_alet_marka" Association="Self.FK_Muzik_alet_marka">
+            <End Role="alet_marka" EntitySet="alet_marka" />
+            <End Role="Muzik" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_garantiBilgisi" Association="Self.FK_Muzik_garantiBilgisi">
+            <End Role="garantiBilgisi" EntitySet="garantiBilgisi" />
+            <End Role="Muzik" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_Muzik2" Association="Self.FK_Muzik_Muzik2">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="Muzik1" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_Muzik3" Association="Self.FK_Muzik_Muzik3">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="Muzik1" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StokTakip_Muzik" Association="Self.FK_StokTakip_Muzik">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="StokTakip" EntitySet="StokTakip" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MuzikAtolyesiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alet_kategori">
+          <Key>
+            <PropertyRef Name="kategoriId" />
+          </Key>
+          <Property Name="kategoriId" Type="Int32" Nullable="false" />
+          <Property Name="kategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Muzik" Relationship="Self.FK_Muzik_alet_kategori" FromRole="alet_kategori" ToRole="Muzik" />
+        </EntityType>
+        <EntityType Name="alet_marka">
+          <Key>
+            <PropertyRef Name="markaId" />
+          </Key>
+          <Property Name="markaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aletId" Type="Int32" />
+          <Property Name="markaAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Muzik" Relationship="Self.FK_alet_marka_alet_marka" FromRole="alet_marka" ToRole="Muzik" />
+          <NavigationProperty Name="Muzik1" Relationship="Self.FK_Muzik_alet_marka" FromRole="alet_marka" ToRole="Muzik" />
+        </EntityType>
+        <EntityType Name="garantiBilgisi">
+          <Key>
+            <PropertyRef Name="garantiId" />
+          </Key>
+          <Property Name="garantiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aletId" Type="Int32" />
+          <Property Name="garantiSüresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Muzik" Relationship="Self.FK_garantiBilgisi_Muzik" FromRole="garantiBilgisi" ToRole="Muzik" />
+          <NavigationProperty Name="Muzik1" Relationship="Self.FK_Muzik_garantiBilgisi" FromRole="garantiBilgisi" ToRole="Muzik" />
+        </EntityType>
+        <EntityType Name="Muzik">
+          <Key>
+            <PropertyRef Name="aletId" />
+          </Key>
+          <Property Name="aletId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriId" Type="Int32" />
+          <Property Name="aletAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="satışAdetSayisi" Type="Int32" />
+          <Property Name="aletFiyati" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="garantiId" Type="Int32" />
+          <Property Name="stokId" Type="Int32" />
+          <Property Name="markaId" Type="Int32" />
+          <NavigationProperty Name="alet_kategori" Relationship="Self.FK_Muzik_alet_kategori" FromRole="Muzik" ToRole="alet_kategori" />
+          <NavigationProperty Name="alet_marka" Relationship="Self.FK_alet_marka_alet_marka" FromRole="Muzik" ToRole="alet_marka" />
+          <NavigationProperty Name="alet_marka1" Relationship="Self.FK_Muzik_alet_marka" FromRole="Muzik" ToRole="alet_marka" />
+          <NavigationProperty Name="garantiBilgisi" Relationship="Self.FK_garantiBilgisi_Muzik" FromRole="Muzik" ToRole="garantiBilgisi" />
+          <NavigationProperty Name="garantiBilgisi1" Relationship="Self.FK_Muzik_garantiBilgisi" FromRole="Muzik" ToRole="garantiBilgisi" />
+          <NavigationProperty Name="StokTakip" Relationship="Self.FK_StokTakip_Muzik" FromRole="Muzik" ToRole="StokTakip" />
+        </EntityType>
+        <EntityType Name="StokTakip">
+          <Key>
+            <PropertyRef Name="stokId" />
+          </Key>
+          <Property Name="stokId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stokAdeti" Type="Int32" />
+          <Property Name="aletId" Type="Int32" />
+          <NavigationProperty Name="Muzik" Relationship="Self.FK_StokTakip_Muzik" FromRole="StokTakip" ToRole="Muzik" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Muzik_alet_kategori">
+          <End Role="alet_kategori" Type="Self.alet_kategori" Multiplicity="0..1" />
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alet_kategori">
+              <PropertyRef Name="kategoriId" />
+            </Principal>
+            <Dependent Role="Muzik">
+              <PropertyRef Name="kategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_alet_marka_alet_marka">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="0..1" />
+          <End Role="alet_marka" Type="Self.alet_marka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="alet_marka">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_alet_marka">
+          <End Role="alet_marka" Type="Self.alet_marka" Multiplicity="0..1" />
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alet_marka">
+              <PropertyRef Name="markaId" />
+            </Principal>
+            <Dependent Role="Muzik">
+              <PropertyRef Name="markaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_garantiBilgisi_Muzik">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="0..1" />
+          <End Role="garantiBilgisi" Type="Self.garantiBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="garantiBilgisi">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_garantiBilgisi">
+          <End Role="garantiBilgisi" Type="Self.garantiBilgisi" Multiplicity="0..1" />
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="garantiBilgisi">
+              <PropertyRef Name="garantiId" />
+            </Principal>
+            <Dependent Role="Muzik">
+              <PropertyRef Name="garantiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_Muzik2">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="1" />
+          <End Role="Muzik1" Type="Self.Muzik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="Muzik1">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muzik_Muzik3">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="1" />
+          <End Role="Muzik1" Type="Self.Muzik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="Muzik1">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StokTakip_Muzik">
+          <End Role="Muzik" Type="Self.Muzik" Multiplicity="0..1" />
+          <End Role="StokTakip" Type="Self.StokTakip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muzik">
+              <PropertyRef Name="aletId" />
+            </Principal>
+            <Dependent Role="StokTakip">
+              <PropertyRef Name="aletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MuzikAtolyesiEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alet_kategori" EntityType="Self.alet_kategori" />
+          <EntitySet Name="alet_marka" EntityType="Self.alet_marka" />
+          <EntitySet Name="garantiBilgisi" EntityType="Self.garantiBilgisi" />
+          <EntitySet Name="Muzik" EntityType="Self.Muzik" />
+          <EntitySet Name="StokTakip" EntityType="Self.StokTakip" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
+          <AssociationSet Name="FK_Muzik_alet_kategori" Association="Self.FK_Muzik_alet_kategori">
+            <End Role="alet_kategori" EntitySet="alet_kategori" />
+            <End Role="Muzik" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_alet_marka_alet_marka" Association="Self.FK_alet_marka_alet_marka">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="alet_marka" EntitySet="alet_marka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_alet_marka" Association="Self.FK_Muzik_alet_marka">
+            <End Role="alet_marka" EntitySet="alet_marka" />
+            <End Role="Muzik" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_garantiBilgisi_Muzik" Association="Self.FK_garantiBilgisi_Muzik">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="garantiBilgisi" EntitySet="garantiBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_garantiBilgisi" Association="Self.FK_Muzik_garantiBilgisi">
+            <End Role="garantiBilgisi" EntitySet="garantiBilgisi" />
+            <End Role="Muzik" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_Muzik2" Association="Self.FK_Muzik_Muzik2">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="Muzik1" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muzik_Muzik3" Association="Self.FK_Muzik_Muzik3">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="Muzik1" EntitySet="Muzik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StokTakip_Muzik" Association="Self.FK_StokTakip_Muzik">
+            <End Role="Muzik" EntitySet="Muzik" />
+            <End Role="StokTakip" EntitySet="StokTakip" />
+          </AssociationSet>
+          <EntitySet Name="Uyeler" EntityType="MuzikAtolyesiModel.Uyeler" />
+        </EntityContainer>
+        <EntityType Name="Uyeler">
+          <Key>
+            <PropertyRef Name="UyeId" />
+          </Key>
+          <Property Name="UyeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UyeSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UyeTc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UyeTel" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UyeAdres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MuzikAtolyesiModelStoreContainer" CdmEntityContainer="MuzikAtolyesiEntities6">
+          <EntitySetMapping Name="alet_kategori">
+            <EntityTypeMapping TypeName="MuzikAtolyesiModel.alet_kategori">
+              <MappingFragment StoreEntitySet="alet_kategori">
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+                <ScalarProperty Name="kategoriAdi" ColumnName="kategoriAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="alet_marka">
+            <EntityTypeMapping TypeName="MuzikAtolyesiModel.alet_marka">
+              <MappingFragment StoreEntitySet="alet_marka">
+                <ScalarProperty Name="markaId" ColumnName="markaId" />
+                <ScalarProperty Name="aletId" ColumnName="aletId" />
+                <ScalarProperty Name="markaAdi" ColumnName="markaAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="garantiBilgisi">
+            <EntityTypeMapping TypeName="MuzikAtolyesiModel.garantiBilgisi">
+              <MappingFragment StoreEntitySet="garantiBilgisi">
+                <ScalarProperty Name="garantiId" ColumnName="garantiId" />
+                <ScalarProperty Name="aletId" ColumnName="aletId" />
+                <ScalarProperty Name="garantiSüresi" ColumnName="garantiSüresi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Muzik">
+            <EntityTypeMapping TypeName="MuzikAtolyesiModel.Muzik">
+              <MappingFragment StoreEntitySet="Muzik">
+                <ScalarProperty Name="aletId" ColumnName="aletId" />
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+                <ScalarProperty Name="aletAdi" ColumnName="aletAdi" />
+                <ScalarProperty Name="satışAdetSayisi" ColumnName="satışAdetSayisi" />
+                <ScalarProperty Name="aletFiyati" ColumnName="aletFiyati" />
+                <ScalarProperty Name="garantiId" ColumnName="garantiId" />
+                <ScalarProperty Name="stokId" ColumnName="stokId" />
+                <ScalarProperty Name="markaId" ColumnName="markaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StokTakip">
+            <EntityTypeMapping TypeName="MuzikAtolyesiModel.StokTakip">
+              <MappingFragment StoreEntitySet="StokTakip">
+                <ScalarProperty Name="stokId" ColumnName="stokId" />
+                <ScalarProperty Name="stokAdeti" ColumnName="stokAdeti" />
+                <ScalarProperty Name="aletId" ColumnName="aletId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfile">
+            <EntityTypeMapping TypeName="MuzikAtolyesiModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uyeler">
+            <EntityTypeMapping TypeName="MuzikAtolyesiModel.Uyeler">
+              <MappingFragment StoreEntitySet="Uyeler">
+                <ScalarProperty Name="UyeAdres" ColumnName="UyeAdres" />
+                <ScalarProperty Name="UyeTel" ColumnName="UyeTel" />
+                <ScalarProperty Name="UyeTc" ColumnName="UyeTc" />
+                <ScalarProperty Name="UyeSoyadi" ColumnName="UyeSoyadi" />
+                <ScalarProperty Name="UyeAdi" ColumnName="UyeAdi" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

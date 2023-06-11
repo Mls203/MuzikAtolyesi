@@ -1,0 +1,26 @@
+﻿@model FinalProje.Models.alet_kategori
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>alet_kategori</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.kategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kategoriAdi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.kategoriId }) |
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</p>

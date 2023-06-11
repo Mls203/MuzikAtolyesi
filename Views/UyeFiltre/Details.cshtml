@@ -1,0 +1,58 @@
+﻿@model FinalProje.Models.Uyeler
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Uyeler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UyeAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UyeAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UyeSoyadi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UyeSoyadi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UyeTc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UyeTc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UyeTel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UyeTel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UyeAdres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UyeAdres)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UyeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

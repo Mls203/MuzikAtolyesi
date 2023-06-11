@@ -1,0 +1,66 @@
+﻿@model  FinalProje.Models.AletKategoriMuzikBaglanti
+
+<style>
+    #deneme {
+        margin-top:50px;
+        color:antiquewhite;
+        border:5px solid hidden;
+    }
+#dıs{
+    position:absolute;
+}
+</style>
+
+@using (Html.BeginForm("Create", "AletKategoriMuzikBaglanti", FormMethod.Post))
+{
+<div class="row" display="flex" style="margin-left:700px" id="dıs" >
+    <div class="container,col-md-4" style="Width:280px" >
+        <div class="form-group" id="deneme">
+
+            @Html.DropDownListFor(Model => Model.kategoriId, Model.KategoriList, "...Çalgı Şeciniz", new { @class = "form-control" })
+
+        </div>
+    </div>
+
+   
+    <div class="container,col-md-4" style="Width:280px" >
+        <div class="form-group" id="deneme">
+
+            @Html.DropDownListFor(Model => Model.aletId, new SelectList(" "), "...Müzik Aleti Listesi", new { @class = "form-control" })
+
+        </div>
+    </div>
+</div>
+}
+@section scripts
+{<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $("#kategoriId").change(function () {
+
+                var id = $(this).val();
+                var AletList = document.getElementsByName("aletId");
+               // AletList.empty();
+            $.ajax({
+
+                url: '/KategoriMüzikBaglanti/GetAletList',
+                type: 'POST',
+                dataType: 'json',
+                data:{ 'id': id },
+                success: function (data) {
+                    $(AletList).children().remove();
+                    for (let i = 0; i < data.length; i++) {
+                        $(AletList).append('<option value=' + data[i].Value + '>' + data[i].Text + '</option>');
+                        console.log(data[i].Text);
+                    }
+                }
+               
+            });
+        });
+
+    });
+
+    </script>
+    
+    }
